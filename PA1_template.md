@@ -92,7 +92,7 @@ head(total_steps_per_day)
 hist(total_steps_per_day,25,ylim=c(0,20), main="Total number of steps taken per day", xlab="Total steps")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-3-1.png)<!-- -->
+![](PA1_template_files/figure-html/total steps per day-1.png)<!-- -->
 
 Below code is used to calculate mean and median of total number of steps taken per day
 
@@ -150,7 +150,7 @@ head(m)
 plot(m[,2],m[,1], type="l", xlab="Interval", ylab="Average number of steps taken")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
+![](PA1_template_files/figure-html/average steps time series plot-1.png)<!-- -->
 
 Code for finding interval that contains maximum number of steps
 
@@ -250,7 +250,7 @@ head(new_total_steps_per_day)
 hist(new_total_steps_per_day,25,ylim=c(0,20), main="Total number of steps taken per day", xlab="Total steps")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-10-1.png)<!-- -->
+![](PA1_template_files/figure-html/new total steps per day-1.png)<!-- -->
 
 Below code is used to calculate mean and median of total number of steps taken per day for new dataset
 
@@ -390,4 +390,4 @@ plot(k[,1], k[,3], type="l", xlab="Interval", ylab="Number of steps", main="week
 plot(k[,1], k[,2], type="l", xlab="Interval", ylab="Number of steps", main="weekday")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-16-1.png)<!-- -->
+![](PA1_template_files/figure-html/weekend & weekday time series plot-1.png)<!-- -->
