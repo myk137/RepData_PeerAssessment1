@@ -30,7 +30,7 @@ total_steps_per_day <- tapply(dataset$steps,dataset$date,sum)
 head(total_steps_per_day)
 hist(total_steps_per_day,25,ylim=c(0,20), main="Total number of steps taken per day", xlab="Total steps")
 ```
-![](PA1_template_files/figure-html/total steps per day-1.png)
+![](PA1_template_files\figure-html\total steps per day-1.png)
 
 Below code is used to calculate mean and median of total number of steps taken per day
 ```{r mean & median}
@@ -51,7 +51,7 @@ colnames(m) <- c("Mean.steps","Interval")
 head(m)
 plot(m[,2],m[,1], type="l", xlab="Interval", ylab="Average number of steps taken")
 ```
-![](PA1_template_files/figure-html/average steps time series plot-1.png)
+![](PA1_template_files\figure-html\average steps time series plot-1.png)
 
 Code for finding interval that contains maximum number of steps
 ```{r maximum steps interval}
@@ -99,7 +99,7 @@ new_total_steps_per_day <- tapply(new_dataset$steps,new_dataset$date,sum)
 head(new_total_steps_per_day)
 hist(new_total_steps_per_day,25,ylim=c(0,20), main="Total number of steps taken per day", xlab="Total steps")
 ```
-![](PA1_template_files/figure-html/new total steps per day-1.png)
+![](PA1_template_files\figure-html\new total steps per day-1.png)
 
 Below code is used to calculate mean and median of total number of steps taken per day for new dataset
 ```{r new mean & median}
@@ -155,4 +155,4 @@ par(mfrow=c(2,1))
 plot(k[,1], k[,3], type="l", xlab="Interval", ylab="Number of steps", main="weekend")
 plot(k[,1], k[,2], type="l", xlab="Interval", ylab="Number of steps", main="weekday")
 ```
-![](PA1_template_files/figure-html/weekend & weekday time series plot-1.png)
+![](PA1_template_files\figure-html\weekend & weekday time series plot-1.png)
