@@ -7,7 +7,7 @@ output:
 
 
 ## Loading and preprocessing the data
-```{r data load, cache=TRUE} 
+```{r data_load, cache=TRUE} 
 dataset <- read.csv("activity.csv", sep=",")
 dataset_without_na <- dataset[complete.cases(dataset),]
 ```
@@ -15,7 +15,7 @@ dataset_without_na <- dataset[complete.cases(dataset),]
 Let's see 'summary' and 'head' for dataset with and without NAs
 
 See the 'summary' of dataset has 2304 NAs but 'summary' of dataset_without_NA doesn't have any NAs
-```{r data summary & head}
+```{r data_summary_&_head}
 summary(dataset)
 summary(dataset_without_na)
 head(dataset)
@@ -25,7 +25,7 @@ head(dataset_without_na)
 
 ## What is mean total number of steps taken per day?
 Below code is used to calculate total number of steps taken per day
-```{r total steps per day}
+```{r total_steps_per_day}
 total_steps_per_day <- tapply(dataset$steps,dataset$date,sum)
 head(total_steps_per_day)
 hist(total_steps_per_day,25,ylim=c(0,20), main="Total number of steps taken per day", xlab="Total steps")
@@ -33,7 +33,7 @@ hist(total_steps_per_day,25,ylim=c(0,20), main="Total number of steps taken per 
 
 
 Below code is used to calculate mean and median of total number of steps taken per day
-```{r mean & median}
+```{r mean_&_median}
 mean_steps_per_day <- tapply(dataset$steps,dataset$date,mean)
 head(mean_steps_per_day)
 median_steps_per_day <- tapply(dataset$steps,dataset$date,median)
@@ -43,7 +43,7 @@ head(median_steps_per_day)
 
 ## What is the average daily activity pattern?
 Code for plotting time series plot
-```{r average steps time series plot}
+```{r average_steps_time_series_plot}
 mean_steps_per_interval <- tapply(dataset_without_na$steps,dataset_without_na$interval,mean)
 head(mean_steps_per_interval)
 m <- cbind(mean_steps_per_interval,dataset[1:288,3])
@@ -54,7 +54,7 @@ plot(m[,2],m[,1], type="l", xlab="Interval", ylab="Average number of steps taken
 
 
 Code for finding interval that contains maximum number of steps
-```{r maximum steps interval}
+```{r maximum_steps_interval}
 max_steps <- max(mean_steps_per_interval)
 max_steps
 index_of_max_steps <- which(mean_steps_per_interval==max_steps)
@@ -66,14 +66,14 @@ Interval having maximum number of steps is **`r interval_of_max_steps`** which c
 
 ## Imputing missing values
 Below code calculates total number of missing values
-```{r missing values count}
+```{r missing_values_count}
 number_of_rows_with_NA <- sum(is.na(dataset))  
 number_of_rows_with_NA
 ```
 Total number of missing values are **`r number_of_rows_with_NA`**
 
 Strategy --> Mean steps per 5-minute interval is used to replace NAs
-```{r NA replacement, cache=TRUE}
+```{r NA_replacement, cache=TRUE}
 round_off <- round(mean_steps_per_interval)  
 v <- cbind(round_off,dataset[1:length(round_off),3])
 colnames(v) <- c("Mean.steps","Interval")
@@ -89,12 +89,12 @@ for(i in 1:dim(v)[1]){
 ```
 
 New dataset with replaced NAs is shown below
-```{r NA imputed data}
+```{r NA_imputed_data}
 head(new_dataset)
 ```
 
 Below code is used to calculate total number of steps taken per day for new dataset
-```{r new total steps per day}
+```{r new_total_steps_per_day}
 new_total_steps_per_day <- tapply(new_dataset$steps,new_dataset$date,sum)
 head(new_total_steps_per_day)
 hist(new_total_steps_per_day,25,ylim=c(0,20), main="Total number of steps taken per day", xlab="Total steps")
@@ -102,7 +102,7 @@ hist(new_total_steps_per_day,25,ylim=c(0,20), main="Total number of steps taken 
 
 
 Below code is used to calculate mean and median of total number of steps taken per day for new dataset
-```{r new mean & median}
+```{r new_mean_&_median}
 new_mean_steps_per_day <- tapply(new_dataset$steps,new_dataset$date,mean)
 head(new_mean_steps_per_day)
 new_median_steps_per_day <- tapply(new_dataset$steps,new_dataset$date,median)
@@ -110,7 +110,7 @@ head(new_median_steps_per_day)
 ```
 
 Below code shows impact of imputing missing values on total steps
-```{r total steps in old & new dataset}
+```{r total_steps_in_old_&_new_dataset}
 total_steps <- sum(dataset_without_na[,1])
 total_steps
 new_total_steps <- sum(new_total_steps_per_day)
@@ -123,18 +123,18 @@ total_steps_diff
 
 ## Are there differences in activity patterns between weekdays and weekends?
 Code to convert date data in our dataset to 'Date' class
-```{r date class conversion}
+```{r date_class_conversion}
 new_dataset$date <- as.Date(new_dataset$date)
 ```
 
 Below code creates new column indicating day type
-```{r day type}
+```{r day_type}
 new_dataset$day.type <- weekdays(new_dataset$date, abbreviate=FALSE)
 head(new_dataset)
 ```
 
 Below code converts day type to either weekday or weekend
-```{r conversion to weekend or weekday}
+```{r conversion_to_weekend_or_weekday}
 for(i in 1:dim(new_dataset)[1]){                                      
         if(new_dataset[i,4]=="Saturday" | new_dataset[i,4]=="Sunday"){
                 new_dataset[i,4] <- "weekend"
@@ -145,7 +145,7 @@ head(new_dataset)
 ```
 
 Code for plotting time series plot
-```{r weekend & weekday time series plot, fig.height=14}
+```{r weekend_&_weekday_time_series_plot, fig.height=14}
 new_mean_steps_per_interval <- with(new_dataset, tapply(steps, list(interval,day.type),mean))
 head(new_mean_steps_per_interval)
 k <- cbind(new_dataset[1:length(round_off),3], new_mean_steps_per_interval)
